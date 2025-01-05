@@ -2,6 +2,7 @@ package com.zalarfresh.ZalarFresh.Model;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,16 +26,19 @@ public class Recolte {
     @Column(nullable = false)
     private Saison saison;
 
+
+    @NotNull(message = "date recolte est obligatoire")
     private LocalDate date;
+
     private double quantity;
 
     @ManyToOne
     @JoinColumn(name = "champ_id", nullable = false)
     private Champ champ;
 
-//    @OneToMany(mappedBy = "harvest", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<TreeHarvestDetail> treeHarvestDetails;
-//
+    @OneToMany(mappedBy = "recolte", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ArbreRecolteDetails> arbreRecolteDetails;
+
     @OneToOne(mappedBy = "recolte", cascade = CascadeType.ALL, orphanRemoval = true)
     private Vente vente;
 }
