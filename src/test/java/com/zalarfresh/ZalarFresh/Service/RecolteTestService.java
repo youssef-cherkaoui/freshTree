@@ -90,10 +90,9 @@ public class RecolteTestService {
         when(recolteRepository.save(recolte)).thenReturn(savedRecolte);
         when(recolteMapper.toResponseDto(savedRecolte)).thenReturn(recolteResponse);
 
-        // Act
         RecolteResponseDTO result = recolteService.creationRecolte(recolteRequestDTO);
 
-        // Assert
+
         assertNotNull(result);
         assertEquals(1L, result.id());
         assertEquals(PRINTEMPS, result.season());
