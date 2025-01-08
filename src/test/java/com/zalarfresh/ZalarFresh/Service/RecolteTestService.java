@@ -103,4 +103,82 @@ public class RecolteTestService {
         verify(recolteRepository, times(1)).save(recolte);
     }
 
+    @Test
+    void testGetRecoltes() {
+
+        Champ champ = new Champ();
+        champ.setId(1L);
+
+        Arbre arbre = new Arbre();
+        arbre.setId(1L);
+        arbre.setChamp(champ);
+
+        Recolte recolte = new Recolte();
+        recolte.setId(1L);
+        recolte.setSaison(PRINTEMPS);
+        recolte.setQuantity(50.0);
+        recolte.setChamp(champ);
+
+        List<Recolte> recoltes = List.of(recolte);
+
+        RecolteResponseDTO recolteResponse = new RecolteResponseDTO(
+                1L, PRINTEMPS, 50.0, new ChampResponseDTO(1L, "Field A", 10.5, 1001L), new ArbreResponseDTO(1L, LocalDate.now(), new ChampResponseDTO(1L, "Field A", 10.5, 1001L))
+        );
+
+        when(recolteRepository.findAll()).thenReturn(recoltes);
+        when(recolteMapper.toResponseDto(recolte)).thenReturn(recolteResponse);
+
+        List<RecolteResponseDTO> result = recolteService.getRecoltes();
+
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        assertEquals(1L, result.get(0).id());
+        assertEquals(50.0, result.get(0).quantity());
+    }
+
+
+    @Test
+    void testDeleteRecolte() {
+
+        Recolte recolte = new Recolte();
+        recolte.setId(1L);
+        recolte.setSaison(PRINTEMPS);
+        recolte.setQuantity(50.0);
+
+        when(recolteRepository.findById(1L)).thenReturn(Optional.of(recolte));
+
+        RecolteResponseDTO recolteResponse = new RecolteResponseDTO(
+                1L, PRINTEMPS, 50.0, new ChampResponseDTO(1L, "Field A", 10.5, 1001L), new ArbreResponseDTO(1L, LocalDate.now(), new ChampResponseDTO(1L, "Field A", 10.5, 1001L))
+        );
+        when(recolteMapper.toResponseDto(recolte)).thenReturn(recolteResponse);
+
+        RecolteResponseDTO result = recolteService.deleteRecolte(1L);
+
+        assertNotNull(result);
+        assertEquals(1L, result.id());
+        assertEquals(50.0, result.quantity());
+        verify(recolteRepository, times(1)).delete(recolte);
+    }
+
+    @Test
+    void testCreationRecolteWithExistingHarvest() {
+
+        RecolteRequestDTO recolteRequestDTO = new RecolteRequestDTO(
+                PRINTEMPS,
+                LocalDate.now(),
+                1L,
+                List.of(new ArbreRecolteDetailsDTO(1L))
+        );
+
+        when(champRepository.findById(1L)).thenReturn(Optional.of(new Champ()));
+        when(recolteRepository.existsBySaisonAndChamp_Id(PRINTEMPS, 1L)).thenReturn(true);
+
+        try {
+            recolteService.creationRecolte(recolteRequestDTO);
+        } catch (IllegalArgumentException e) {
+            assertEquals("Une récolte existe déjà pour cette saison et ce champ.", e.getMessage());
+        }
+    }
+
+
 }
