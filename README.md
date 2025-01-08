@@ -12,6 +12,9 @@
 ### Base de Données
 - **MYSQL** : Base de données relationnelle utilisée pour la persistance.
 
+###TEST-API 
+- **Postman** : Utile pour tester vos API REST de manière simple et efficace. 
+
 ### Conteneurisation
 - **Docker** : Permet de conteneuriser l'application pour un déploiement simplifié et reproductible.
 
