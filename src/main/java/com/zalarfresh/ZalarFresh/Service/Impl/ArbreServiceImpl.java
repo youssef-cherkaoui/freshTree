@@ -2,7 +2,6 @@ package com.zalarfresh.ZalarFresh.Service.Impl;
 
 import com.zalarfresh.ZalarFresh.DTO.request.ArbreRequestDTO;
 import com.zalarfresh.ZalarFresh.DTO.response.ArbreResponseDTO;
-import com.zalarfresh.ZalarFresh.DTO.response.ChampResponseDTO;
 import com.zalarfresh.ZalarFresh.Exception.CustomNotFoundException;
 import com.zalarfresh.ZalarFresh.Exception.ValidationException;
 import com.zalarfresh.ZalarFresh.Mapper.ArbreMapper;
@@ -103,6 +102,7 @@ public class ArbreServiceImpl implements ArbreService {
                 .map(arbreMapper::ArbreToArbreResponseDTO)
                 .toList();
     }
+
 
 
 
