@@ -8,6 +8,7 @@
 ### Backend
 - **Spring Boot** : Utilisé pour créer l'API REST et gérer la logique métier.
 - **Spring Data JPA** : Simplifie les interactions avec la base de données relationnelle grâce à des abstractions puissantes.
+- **Spring Security** : Fournit une protection contre une grande variété de menaces de sécurité, telles que l'authentification, l'autorisation, les attaques CSRF, la gestion des sessions
 
 ### Base de Données
 - **MYSQL** : Base de données relationnelle utilisée pour la persistance.
