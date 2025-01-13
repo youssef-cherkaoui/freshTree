@@ -11,7 +11,6 @@ import com.zalarfresh.ZalarFresh.Repository.ArbreRepository;
 import com.zalarfresh.ZalarFresh.Repository.ChampRepository;
 import com.zalarfresh.ZalarFresh.Repository.RecolteRepository;
 import com.zalarfresh.ZalarFresh.Service.Impl.RecolteServiceImpl;
-import jakarta.validation.constraints.PositiveOrZero;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
