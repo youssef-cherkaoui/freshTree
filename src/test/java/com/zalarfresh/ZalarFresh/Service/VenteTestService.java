@@ -9,12 +9,10 @@ import com.zalarfresh.ZalarFresh.Model.Vente;
 import com.zalarfresh.ZalarFresh.Repository.RecolteRepository;
 import com.zalarfresh.ZalarFresh.Repository.VenteRepository;
 import com.zalarfresh.ZalarFresh.Service.Impl.VenteServiceImpl;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
